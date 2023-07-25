@@ -1,0 +1,21 @@
+version: "3"
+services:
+  ros_melodic:
+    container_name: ros_melodic
+    image: ros_melodic
+    build:
+      context: .
+      args:
+        - USER_NAME=aoki
+        - GROUP_NAME=aoki
+        - UID=1000
+        - GID=1000
+    environment:
+      - DISPLAY=${DISPLAY}
+    volumes:
+       - /tmp/.X11-unix:/tmp/.X11-unix
+       - $HOME/.Xauthority/:/root/.Xauthority
+       - /home/aoki/ros_melodic_ws:/ros_ws
+       - /dev/dri:/dev/dri
+    tty: true
+    user: "${UID}:${GID}"
